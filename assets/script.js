@@ -5,7 +5,21 @@ quizbox.appendChild(start)
 start.textContent = 'Click to Start'
 
 start.addEventListener('click', function() {
-  console.log('hello world')
+  // disappears start button
+  start.style.display = "none";
+
+  // creates choice buttons
+  var cA = document.createElement("button")
+  var cB = document.createElement('button')
+  var cC = document.createElement('button')
+  var cD = document.createElement('button')
+  quizbox.appendChild(cA)
+  quizbox.appendChild(cB)
+  quizbox.appendChild(cC)
+  quizbox.appendChild(cD)
+
+  
+
 })
 
 var questions = [
@@ -33,5 +47,4 @@ var questions = [
 
 var questionset = questions[Symbol.iterator]()
 
-console.log(questions[0].answer)
 
