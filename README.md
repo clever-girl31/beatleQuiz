@@ -5,7 +5,7 @@ This project was created in order to maintain our collective memory of the most 
 
 ## Application
 
-(Link to deplloyed application)
+[The Beatles Quiz](https://clever-girl31.github.io/beatleQuiz/)
 
 ![Screenshot of The Beatles Quiz](./assets/screenshotTBQ.png)
 
