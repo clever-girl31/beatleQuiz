@@ -1,8 +1,16 @@
+// header element
+var header = document.querySelector("h1")
+header.textContent = ("The Beatles Quiz")
 // where the start button and then answers are housed
 var quizbox = document.querySelector('#box')
 
 // where the question is displayed
 var questionbox = document.querySelector("#question")
+
+// keepscore
+var userscore = 0
+
+// username entry field
 
 
 // setting timer
@@ -21,8 +29,6 @@ start.addEventListener('click', function () {
   // disappears start button
   start.style.display = "none";
   
-  // creates choice buttons
-  
   // starts clock
   var startclock = setInterval(function () {
     seconds--
@@ -31,45 +37,47 @@ start.addEventListener('click', function () {
       clearInterval(startclock)
       timer.textContent = "Time left: 0"
       console.log("game over")
-      // replace this with nav to score screen.
+      scoreScreen()
+      return
     }
   }, 1000)
   
-  makebuttons()
+  makebuttons(startclock)
 })
 
 var questions = [
   {
-    question: "Which is Z?",
-    answer: "Z",
-    choices: ["A", "B", "Z", "D"]
+    question: "I am the Walrus",
+    answer: "Kookookachoo!",
+    choices: ["Cowabunga!", "Kookookachoo!", "Yipee Ki-Yay!", "By Jove!"]
   },
 
   {
-    question: "Which is 2?",
-    answer: "2",
-    choices: ["A", "B", "2", "D"]
+    question: "Lonely Hearts Club Band",
+    answer: "Sgt. Peppers'",
+    choices: ["General Studies'", "Captain Crunch's", "Corporal Kahlua's", "Sgt. Peppers'"]
   },
 
   {
-    question: "Which is 3?",
-    answer: "3",
-    choices: ["A", "3", "C", "D"]
+    question: "Hey",
+    answer: "Jude",
+    choices: ["What's Going On?", "I'm Walkin' Here!", "Jude", "What's the Big Idea?"]
   },
 
   {
-    question: "Which is 4?",
-    answer: "4",
-    choices: ["4", "B", "C", "D"]
+    question: "Ain't Got Nothing But Love Babe, '_' Days A Week",
+    answer: "8",
+    choices: ["5", "8", "9", "2"]
   },
 
   {
-    question: "Which is 5?",
-    answer: "5",
-    choices: ["A", "B", "C", "5"]
+    question: "All My Troubles Seemed So Far Away",
+    answer: "Yesterday",
+    choices: ["Yesterday", "Back in the USSR", "Before Covid Hit", "Back When US Currency Was Still Backed by Gold"]
   }
 ]
-function makebuttons() {
+
+function makebuttons(startclock) {
   var cA = document.createElement("button")
   var cB = document.createElement('button')
   var cC = document.createElement('button')
@@ -83,52 +91,67 @@ function makebuttons() {
   
   
   function letsGo() {
-  // questions array
-  if (i >= 5) {
-    console.log("end of game")
-    return
+    if (i >= 5) {
+      console.log("end of game")
+      clearInterval(startclock)
+      timer.style.display = "none"
+      scoreScreen()
+      return
+      }
+
+    questionbox.textContent = questions[i].question
+  
+    cA.textContent = questions[i].choices[0]
+    cA.removeEventListener("click", checker)
+    cA.addEventListener("click", checker)
+
+    cB.textContent = questions[i].choices[1]
+    cB.removeEventListener("click", checker)
+    cB.addEventListener("click", checker)
+
+    cC.textContent = questions[i].choices[2]
+    cC.removeEventListener("click", checker)
+    cC.addEventListener("click", checker)
+
+    cD.textContent = questions[i].choices[3]
+    cD.removeEventListener("click", checker)
+    cD.addEventListener("click", checker)
   }
-  
-  
-  questionbox.textContent = questions[i].question
-  
-  cA.textContent = questions[i].choices[0]
-  cA.removeEventListener("click", checker)
-  cA.addEventListener("click", checker)
 
-  cB.textContent = questions[i].choices[1]
-  cB.removeEventListener("click", checker)
-  cB.addEventListener("click", checker)
-
-  cC.textContent = questions[i].choices[2]
-  cC.removeEventListener("click", checker)
-  cC.addEventListener("click", checker)
-
-  cD.textContent = questions[i].choices[3]
-  cD.removeEventListener("click", checker)
-  cD.addEventListener("click", checker)
-}
-
-// checks the answers and advances to next
-function checker () {
-  if (this.textContent === questions[i].answer) {
-    console.log("correct!")
-    i += 1
-    // add 1 to score, store to storage.
-    letsGo(i)
-    return
-  } else {
-    if (seconds > 5 && this.textContent != questions[i].answer) {
-      seconds -= 5
-      timer.textContent = "Time left: " + seconds
-      console.log("wrong")
+  // checks the answers and advances to next
+  function checker () {
+    if (this.textContent === questions[i].answer) {
+      console.log("correct!")
+      userscore ++
       i += 1
+     // add 1 to score, store to storage.
       letsGo(i)
       return
+    } else {
+        if (seconds > 5 && this.textContent != questions[i].answer) {
+        seconds -= 5
+        timer.textContent = "Time left: " + seconds
+        console.log("wrong")
+        i += 1
+        letsGo(i)
+        return
+        } 
+        else {
+        seconds = 0
+        }
       } 
-      else {
-      seconds = 0
-  
-    }
   }
-}}
+}
+
+function scoreScreen () {
+  console.log("welcome to the score screen")
+  timer.style.display = "none"
+  quizbox.style.display = "none"
+  header.textContent = "Game Over"
+  questionbox.textContent = "Your Score: " + userscore
+  console.log(userscore)
+  var entername = document.createElement('input')
+
+  
+
+}
