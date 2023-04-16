@@ -31,6 +31,7 @@ var questions = [
 var seconds = 60
 var timer = document.getElementById("timer")
 timer.textContent = "Time left: " + seconds
+
 // create start button
 var start = document.createElement("button")
 // stick start button in the quizbox
@@ -41,7 +42,7 @@ start.textContent = 'Click to Start'
 start.addEventListener('click', function() {
   // disappears start button
   start.style.display = "none";
-
+  
   // creates choice buttons
   var cA = document.createElement("button")
   var cB = document.createElement('button')
@@ -51,27 +52,47 @@ start.addEventListener('click', function() {
   quizbox.appendChild(cB)
   quizbox.appendChild(cC)
   quizbox.appendChild(cD)
-
+  
+  // starts clock
+  var startclock = setInterval(function() {
+    seconds--
+    timer.textContent = "Time left: " + seconds
+    if (seconds <= 0) {
+      clearInterval(startclock)
+      timer.textContent = "Time left: 0"
+      console.log("game over")
+      // replace this with nav to score screen.
+    }
+  }, 1000)
+  
   // starts actual quiz
-  quiztime()
-  function quiztime () {
-    questionbox.textContent = questions[0].question
-
-    cA.textContent = questions[0].choices[0]
+  quiztime(0)
+  function quiztime (i) {
+    questionbox.textContent = questions[i].question
+    
+    cA.textContent = questions[i].choices[0]
     cA.addEventListener('click', function() {
-      if (questions[0].choices[0] === questions[0].answer) {
+      if (questions[i].choices[0] === questions[i].answer) {
         console.log("correct!")
         // and go to next question
-      } else {
+        quiztime(i + 1)
+      } if (seconds < 5) {
+        seconds = 0
+        // clearInterval(startclock)
+        // timer.textContent = "Time left: " + seconds
+      } else { 
+        seconds -=5
+        timer.textContent = "Time left: " + seconds
         console.log("wrong")
+        quiztime(i + 1)
         // take 5 seconds off timer
         // and go to next question
       }
 
     })
-    cB.textContent = questions[0].choices[1]
+    cB.textContent = questions[i].choices[1]
     cB.addEventListener('click', function () {
-      if (questions[0].choices[1] === questions[0].answer) {
+      if (questions[i].choices[1] === questions[i].answer) {
         console.log("correct!")
         // and go to next question
       } else {
@@ -81,9 +102,9 @@ start.addEventListener('click', function() {
       }
 
     })
-    cC.textContent = questions[0].choices[2]
+    cC.textContent = questions[i].choices[2]
     cC.addEventListener('click', function () {
-      if (questions[0].choices[2] === questions[0].answer) {
+      if (questions[i].choices[2] === questions[i].answer) {
         console.log("correct!")
         // and go to next question
       } else {
@@ -93,9 +114,9 @@ start.addEventListener('click', function() {
       }
 
     })
-    cD.textContent = questions[0].choices[3]
+    cD.textContent = questions[i].choices[3]
     cD.addEventListener('click', function () {
-      if (questions[0].choices[3] === questions[0].answer) {
+      if (questions[i].choices[3] === questions[i].answer) {
         console.log("correct!")
         // and go to next question
       } else {
