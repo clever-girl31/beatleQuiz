@@ -11,6 +11,7 @@ var questionbox = document.querySelector("#question")
 var userscore = 0
 
 // username entry field
+var nameentry = document.querySelector('#entername')
 
 
 // setting timer
@@ -37,7 +38,7 @@ start.addEventListener('click', function () {
       clearInterval(startclock)
       timer.textContent = "Time left: 0"
       console.log("game over")
-      scoreScreen()
+      gameOver()
       return
     }
   }, 1000)
@@ -95,7 +96,7 @@ function makebuttons(startclock) {
       console.log("end of game")
       clearInterval(startclock)
       timer.style.display = "none"
-      scoreScreen()
+      gameOver()
       return
       }
 
@@ -143,15 +144,30 @@ function makebuttons(startclock) {
   }
 }
 
-function scoreScreen () {
+function gameOver () {
   console.log("welcome to the score screen")
   timer.style.display = "none"
   quizbox.style.display = "none"
   header.textContent = "Game Over"
   questionbox.textContent = "Your Score: " + userscore
   console.log(userscore)
+
+  // enter username
   var entername = document.createElement('input')
+  nameentry.appendChild(entername)
+  entername.setAttribute('placeholder', 'Enter Name')
 
-  
+  // save button
+  var save = document.createElement("button")
+  nameentry.appendChild(save)
+  save.textContent = "Save Score"
+  save.addEventListener('click', function() {
+    localStorage.setItem('nameInput', entername.value)
+    localStorage.setItem('userScore', userscore)
+    highScore()
+  })
+}
 
+function highScore() {
+  console.log("welcome to the highscore screen")
 }
