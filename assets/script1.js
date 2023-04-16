@@ -46,7 +46,6 @@ start.addEventListener('click', function () {
     if (seconds <= 0) {
       clearInterval(startclock)
       timer.textContent = "Time left: 0"
-      console.log("game over")
       gameOver()
       return
     }
@@ -64,8 +63,8 @@ var questions = [
 
   {
     question: "Lonely Hearts Club Band",
-    answer: "Sgt. Peppers'",
-    choices: ["General Studies'", "Captain Crunch's", "Corporal Kahlua's", "Sgt. Peppers'"]
+    answer: "Sgt. Pepper's",
+    choices: ["General Studies'", "Captain Crunch's", "Corporal Kahlua's", "Sgt. Pepper's"]
   },
 
   {
@@ -126,7 +125,6 @@ function makebuttons(startclock) {
   
   function letsGo() {
     if (i >= 5) {
-      console.log("end of game")
       clearInterval(startclock)
       timer.style.display = "none"
       gameOver()
@@ -155,7 +153,6 @@ function makebuttons(startclock) {
   // checks the answers and advances to next
   function checker () {
     if (this.textContent === questions[i].answer) {
-      console.log("correct!")
       userscore ++
       i += 1
      // add 1 to score, store to storage.
@@ -165,7 +162,6 @@ function makebuttons(startclock) {
         if (seconds > 5 && this.textContent != questions[i].answer) {
         seconds -= 5
         timer.textContent = "Time left: " + seconds
-        console.log("wrong")
         i += 1
         letsGo(i)
         return
@@ -178,17 +174,16 @@ function makebuttons(startclock) {
 }
 
 function gameOver () {
-  console.log("welcome to the score screen")
   timer.style.display = "none"
   quizbox.style.display = "none"
   header.textContent = "Game Over"
   questionbox.textContent = "Your Score: " + userscore
-  console.log(userscore)
 
   // enter username
   var entername = document.createElement('input')
   nameentry.appendChild(entername)
-  entername.setAttribute('placeholder', 'Enter Name')
+  entername.setAttribute('placeholder', 'Enter Initials')
+  entername.maxLength = 3
   entername.style.fontSize = '20px'
   entername.style.height = 'fit-content'
 
@@ -248,7 +243,6 @@ function gameOver () {
         finalList.sort((a,b) => b.textContent.slice(-1) - a.textContent.slice(-1))
 
         finalList.forEach(item => highscoretable.appendChild(item))
-        console.log(finalList)
         // create button to play again
         var playAgain = document.createElement("button")
         startOver.appendChild(playAgain)
