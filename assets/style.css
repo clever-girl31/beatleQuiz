@@ -7,3 +7,18 @@ head {
   flex-direction: column;
   align-items: center;
 }
+
+#highscorebody {
+  background-color: blueviolet;
+  flex-direction: column;
+  width: 80vw;
+}
+
+#nameList {
+  flex-direction: column;
+}
+
+#scoreList {
+  flex-direction: column;
+}
+

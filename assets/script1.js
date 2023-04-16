@@ -13,6 +13,10 @@ var userscore = 0
 // username entry field
 var nameentry = document.querySelector('#entername')
 
+// high score table
+var highscoretable = document.querySelector("#highscorebody")
+var listOfNames = document.querySelector("#nameList")
+var listOfScores = document.querySelector("#scoreList")
 
 // setting timer
 var seconds = 60
@@ -162,12 +166,42 @@ function gameOver () {
   nameentry.appendChild(save)
   save.textContent = "Save Score"
   save.addEventListener('click', function() {
-    localStorage.setItem('nameInput', entername.value)
-    localStorage.setItem('userScore', userscore)
+    var nameInput = entername.value;
+    var userScore = userscore;
+    var pastNames = localStorage.getItem('nameInput')
+    var pastScores = localStorage.getItem('userScore')
+    if (pastNames && pastScores) {
+      localStorage.setItem('nameInput', pastNames + ',' + nameInput)
+      localStorage.setItem('userScore', pastScores + ',' + userScore)
+    } else {
+      localStorage.setItem('nameInput', nameInput)
+      localStorage.setItem('userScore', userScore)
+    }
     highScore()
-  })
+    
+    function highScore() {
+      header.textContent = "High Scores"
+      questionbox.style.display = "none"
+      nameentry.style.display = "none"
+      var li1 = document.createElement("li")
+      highscoretable.appendChild(li1)
+      li1.textContent = nameInput + ": " + userScore
+      datPastNames = pastNames.split(',')
+      datPastScores = pastScores.split(',')
+      for (e = 0; e < datPastNames.length; e++) {
+        var li2= document.createElement("li")
+        highscoretable.appendChild(li2)
+        li2.textContent = datPastNames[e] + ": " + datPastScores[e];
+      }
+      // nameList.textContent = pastNames
+      // scoreList.textContent = pastScores
+      var finalList = Array.from(document.querySelectorAll('#highscorebody li'))
+      finalList.sort((b,a) => a.textContent.slice(-1).localeCompare(b.textContent.slice(-1)));
+      highscoretable.innerHTML = ''
+      finalList.forEach(item => highscoretable.appendChild(item))
+      console.log(finalList)
+      // !just need to add button to go back to beginning.
+}})
 }
 
-function highScore() {
-  console.log("welcome to the highscore screen")
-}
+
