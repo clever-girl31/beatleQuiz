@@ -6,9 +6,9 @@ var questionbox = document.querySelector("#question")
 
 // questions array
 var questions = [
-  {question: "Which is 1?",
-  answer: "1",
-  choices: ["A", "B", "1", "D"]},
+  {question: "Which is Z?",
+  answer: "Z",
+  choices: ["A", "B", "Z", "D"]},
 
   {question: "Which is 2?",
   answer: "2",
@@ -72,60 +72,88 @@ start.addEventListener('click', function() {
     
     cA.textContent = questions[i].choices[0]
     cA.addEventListener('click', function() {
-      if (questions[i].choices[0] === questions[i].answer) {
+      if (questions[i].choices[0] == questions[i].answer) {
         console.log("correct!")
-        // and go to next question
+        // add 1 to score, store to storage.
         quiztime(i + 1)
-      } if (seconds < 5) {
-        seconds = 0
-        // clearInterval(startclock)
-        // timer.textContent = "Time left: " + seconds
-      } else { 
-        seconds -=5
-        timer.textContent = "Time left: " + seconds
-        console.log("wrong")
-        quiztime(i + 1)
-        // take 5 seconds off timer
-        // and go to next question
+        return
+      } else {
+        if (seconds < 5) {
+          seconds = 0
+          // } if (i > 4) {
+          // funtion -- go to score screen
+        } else { 
+          seconds -=5
+          timer.textContent = "Time left: " + seconds
+          console.log("wrong")
+          quiztime(i + 1)
+          return
       }
+    }})
 
-    })
     cB.textContent = questions[i].choices[1]
     cB.addEventListener('click', function () {
-      if (questions[i].choices[1] === questions[i].answer) {
+      if (questions[i].choices[1] == questions[i].answer) {
         console.log("correct!")
-        // and go to next question
+        // add 1 to score, store to storage.
+        quiztime(i + 1)
+        return
       } else {
-        console.log("wrong")
-        // take 5 seconds off timer
-        // and go to next question
-      }
+        if (seconds < 5) {
+          seconds = 0
+          // } if (i > 4) {
+          // funtion -- go to score screen
+        } else {
+          seconds -= 5
+          timer.textContent = "Time left: " + seconds
+          console.log("wrong")
+          quiztime(i + 1)
+          return
+        }
+    }})
 
-    })
     cC.textContent = questions[i].choices[2]
     cC.addEventListener('click', function () {
-      if (questions[i].choices[2] === questions[i].answer) {
+      if (questions[i].choices[2] == questions[i].answer) {
         console.log("correct!")
-        // and go to next question
+        // add 1 to score, store to storage.
+        quiztime(i + 1)
+        return
       } else {
-        console.log("wrong")
-        // take 5 seconds off timer
-        // and go to next question
-      }
+        if (seconds < 5) {
+          seconds = 0
+          // } if (i > 4) {
+          // funtion -- go to score screen
+        } else {
+          seconds -= 5
+          timer.textContent = "Time left: " + seconds
+          console.log("wrong")
+          quiztime(i + 1)
+          return
+        }
+    }})
 
-    })
     cD.textContent = questions[i].choices[3]
     cD.addEventListener('click', function () {
-      if (questions[i].choices[3] === questions[i].answer) {
+      if (questions[i].choices[3] == questions[i].answer) {
         console.log("correct!")
-        // and go to next question
+        // add 1 to score, store to storage.
+        quiztime(i + 1)
+        return
       } else {
-        console.log("wrong")
-        // take 5 seconds off timer
-        // and go to next question
-      }
+        if (seconds < 5) {
+          seconds = 0
+          // } if (i > 4) {
+          // funtion -- go to score screen
+        } else {
+          seconds -= 5
+          timer.textContent = "Time left: " + seconds
+          console.log("wrong")
+          quiztime(i + 1)
+          return
+        }
+    }})
 
-    })
   }}
 
   
