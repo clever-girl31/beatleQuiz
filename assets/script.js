@@ -76,7 +76,6 @@ start.addEventListener('click', function() {
         console.log("correct!")
         // add 1 to score, store to storage.
         quiztime(i + 1)
-        return
       } else {
         if (seconds < 5) {
           seconds = 0
@@ -97,7 +96,6 @@ start.addEventListener('click', function() {
         console.log("correct!")
         // add 1 to score, store to storage.
         quiztime(i + 1)
-        return
       } else {
         if (seconds < 5) {
           seconds = 0
@@ -116,9 +114,8 @@ start.addEventListener('click', function() {
     cC.addEventListener('click', function () {
       if (questions[i].choices[2] == questions[i].answer) {
         console.log("correct!")
-        // add 1 to score, store to storage.
+        // add 1 to score, store to storage
         quiztime(i + 1)
-        return
       } else {
         if (seconds < 5) {
           seconds = 0
@@ -139,7 +136,6 @@ start.addEventListener('click', function() {
         console.log("correct!")
         // add 1 to score, store to storage.
         quiztime(i + 1)
-        return
       } else {
         if (seconds < 5) {
           seconds = 0
