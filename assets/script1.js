@@ -27,6 +27,12 @@ var start = document.createElement("button")
 // stick start button in the quizbox
 quizbox.appendChild(start)
 start.textContent = 'Click to Start'
+start.style.backgroundColor = 'white'
+start.style.height = 'fit-content'
+start.style.padding = '4px 30px'
+start.style.width = 'fit-content'
+start.style.borderRadius = '25px'
+start.style.fontSize = '20px'
 
 // assigning what happens when start is clicked
 start.addEventListener('click', function () {
@@ -69,7 +75,7 @@ var questions = [
   },
 
   {
-    question: "Ain't Got Nothing But Love Babe, '_' Days A Week",
+    question: "Days A Week",
     answer: "8",
     choices: ["5", "8", "9", "2"]
   },
@@ -90,6 +96,30 @@ function makebuttons(startclock) {
   quizbox.appendChild(cB)
   quizbox.appendChild(cC)
   quizbox.appendChild(cD)
+  cA.style.backgroundColor = 'white'
+  cA.style.height = 'fit-content'
+  cA.style.padding = '4px 30px'
+  cA.style.width = 'fit-content'
+  cA.style.borderRadius = '25px'
+  cA.style.fontSize = '20px'
+  cB.style.backgroundColor = 'white'
+  cB.style.height = 'fit-content'
+  cB.style.padding = '4px 30px'
+  cB.style.width = 'fit-content'
+  cB.style.borderRadius = '25px'
+  cB.style.fontSize = '20px'
+  cC.style.backgroundColor = 'white'
+  cC.style.height = 'fit-content'
+  cC.style.padding = '4px 30px'
+  cC.style.width = 'fit-content'
+  cC.style.borderRadius = '25px'
+  cC.style.fontSize = '20px'
+  cD.style.backgroundColor = 'white'
+  cD.style.height = 'fit-content'
+  cD.style.padding = '4px 30px'
+  cD.style.width = 'fit-content'
+  cD.style.borderRadius = '25px'
+  cD.style.fontSize = '20px'
   var i = 0
   letsGo(i)
   
@@ -159,11 +189,19 @@ function gameOver () {
   var entername = document.createElement('input')
   nameentry.appendChild(entername)
   entername.setAttribute('placeholder', 'Enter Name')
+  entername.style.fontSize = '20px'
+  entername.style.height = 'fit-content'
 
   // save button
   var save = document.createElement("button")
   nameentry.appendChild(save)
   save.textContent = "Save Score"
+  save.style.backgroundColor = 'white'
+  save.style.height = 'fit-content'
+  save.style.padding = '4px 30px'
+  save.style.width = 'fit-content'
+  save.style.borderRadius = '25px'
+  save.style.fontSize = '20px'
   save.addEventListener('click', function() {
     var nameInput = entername.value;
     var userScore = userscore;
@@ -189,34 +227,58 @@ function gameOver () {
       var li1 = document.createElement("li")
       highscoretable.appendChild(li1)
       li1.textContent = nameInput + ": " + userScore
-
-      // turn past game data in local storage into two separate arrays
-      datPastNames = pastNames.split(',')
-      datPastScores = pastScores.split(',')
-
-      // create a new line and display text for every past name and score in local storage
-      for (e = 0; e < datPastNames.length; e++) {
-        var li2= document.createElement("li")
-        highscoretable.appendChild(li2)
-        li2.textContent = datPastNames[e] + ": " + datPastScores[e];
-      }
-
-      // turn data from all list items into a new array
-      var finalList = Array.from(document.querySelectorAll('li'))
       
-      // sort the final list by descending score, by using slice(-1) to look at the last character of each line, and then sorting by that value.
-      finalList.sort((a,b) => b.textContent.slice(-1) - a.textContent.slice(-1))
+      // if statement to resolve bug when local storage is empty on first play
+      if (pastNames !== null) {
+        // turn past game data in local storage into two separate arrays
+        datPastNames = pastNames.split(',')
+        datPastScores = pastScores.split(',')
+        
+        // create a new line and display text for every past name and score in local storage
+        for (e = 0; e < datPastNames.length; e++) {
+          var li2= document.createElement("li")
+          highscoretable.appendChild(li2)
+          li2.textContent = datPastNames[e] + ": " + datPastScores[e];
+        }
 
-      finalList.forEach(item => highscoretable.appendChild(item))
-      console.log(finalList)
-      // create button to play again
-      var playAgain = document.createElement("button")
-      startOver.appendChild(playAgain)
-      playAgain.textContent = 'Play Again!'
-      // button refreshes page
-      playAgain.addEventListener('click', function() {
-        location.reload()
-      })
+        // turn data from all list items into a new array
+        var finalList = Array.from(document.querySelectorAll('li'))
+        
+        // sort the final list by descending score, by using slice(-1) to look at the last character of each line, and then sorting by that value.
+        finalList.sort((a,b) => b.textContent.slice(-1) - a.textContent.slice(-1))
+
+        finalList.forEach(item => highscoretable.appendChild(item))
+        console.log(finalList)
+        // create button to play again
+        var playAgain = document.createElement("button")
+        startOver.appendChild(playAgain)
+        playAgain.textContent = 'Play Again!'
+        playAgain.style.backgroundColor = 'white'
+        playAgain.style.height = 'fit-content'
+        playAgain.style.padding = '4px 30px'
+        playAgain.style.width = 'fit-content'
+        playAgain.style.borderRadius = '25px'
+        playAgain.style.fontSize = '20px'
+        // button refreshes page
+        playAgain.addEventListener('click', function() {
+          location.reload()
+        })
+      } else { 
+        // create play again button for first play
+        var playAgain = document.createElement("button")
+        startOver.appendChild(playAgain)
+        playAgain.textContent = 'Play Again!'
+        playAgain.style.backgroundColor = 'white'
+        playAgain.style.height = 'fit-content'
+        playAgain.style.padding = '4px 30px'
+        playAgain.style.width = 'fit-content'
+        playAgain.style.borderRadius = '25px'
+        playAgain.style.fontSize = '20px'
+        // button refreshes page
+        playAgain.addEventListener('click', function () {
+          location.reload()
+        })
+        }
 }})
 }
 

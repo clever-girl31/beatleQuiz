@@ -2,14 +2,37 @@ head {
   display: none;
 }
 
+@font-face {
+  font-family: 'beatle';
+  src: url('./Beatles_Font_FONTSMAGAZINE.TTF') format('truetype');
+}
 * {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Oswald', sans-serif;
 }
 
+#timer {
+  width: 80vw;
+  align-items: flex-end;
+}
+h1 {
+  font-family: 'beatle', 'Times New Roman', Times, serif;
+  font-size: 80px;
+}
+
+#question {
+  font-size: 55px;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+#box {
+  line-height: 30px;
+}
 #highscorebody {
-  background-color: blueviolet;
+  font-size: 36px;
   flex-direction: column;
   width: 80vw;
 }
